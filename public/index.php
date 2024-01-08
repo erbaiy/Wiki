@@ -1,13 +1,43 @@
 <?php
+session_start();
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
 
-// use App\Controllers\Home;
+use App\Controllers\AutontificationController;
+use Symfony\Component\VarDumper\VarDumper;
 
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
     case 'home':
-        require('../view/home.php');
+        require('../view/index.php');
         break;
+    case 'admin':
+        require('../view/admin/home.php');
+        break;
+    case 'Dashboard':
+        require('../view/admin/Dashboard.php');
+        break;
+
+    case 'register':
+        $register = new AutontificationController();
+        $register->register();
+        require('../view/register.php');
+        break;
+
+    case 'login':
+        $register = new AutontificationController();
+        $register->login();
+        break;
+
+    case 'getlogin':
+        $register = new AutontificationController();
+
+        $register->getlogin();
+
+        break;
+
     default:
         // Handle 404 or redirect to the default route
         header('HTTP/1.0 404 Not Found');

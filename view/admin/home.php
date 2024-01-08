@@ -104,12 +104,9 @@
                     </thead>
                     <thead class="bg-light">
                         <tr>
-                            <th>title</th>
-                            <th>description</th>
-                            <th>company</th>
-                            <th>location</th>
-                            <th>status</th>
-                            <th>action</th>
+                            <th>name</th>
+                            <th></th>
+
                         </tr>
                         <thead>
                         <tbody>

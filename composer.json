@@ -11,5 +11,8 @@
       "email": "younesserbai@gmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "symfony/var-dumper": "^7.0",
+    "vlucas/phpdotenv": "^5.6"
+  }
 }
