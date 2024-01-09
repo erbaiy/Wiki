@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App\Controllers;
+
 
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -36,9 +38,11 @@ class AutontificationController
 
             $user = $userModel->login($username, $password);
 
-            // VarDumper::dump($user);
-            // die();
+
             if ($user && password_verify($password, $user['password']) && $username == $user['username']) {
+                $_SESSION = $user['user_id'];
+                // VarDumper::dump($_SESSION);
+                // die();
                 if ($user['role'] == 'admin') {
                     require('../view/admin/home.php');
                 } elseif ($user['role'] == 'author') {

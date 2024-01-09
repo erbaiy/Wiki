@@ -7,6 +7,7 @@ $dotenv->load();
 use App\Controllers\AutontificationController;
 use Symfony\Component\VarDumper\VarDumper;
 
+use App\Controllers\admin\CategoryController;
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
@@ -35,6 +36,44 @@ switch ($router) {
         $register = new AutontificationController();
 
         $register->getlogin();
+
+        break;
+    case 'author':
+
+        require('../view/author/author.php');
+        break;
+        break;
+    case 'tags':
+
+        require('../view/admin/tags.php');
+        break;
+    case 'users':
+
+        require('../view/admin/users.php');
+        break;
+
+    case 'selectData':
+
+        $objet = new CategoryController();
+        $objet->selectData();
+
+        break;
+    case 'addCategory':
+
+        $objet = new CategoryController();
+        $objet->addCategory();
+
+        break;
+    case 'deleteCategory':
+
+        $objet = new CategoryController();
+        $objet->deleteCategory();
+
+        break;
+    case 'selectCategoryName':
+
+        $objet = new CategoryController();
+        $objet->selectCategoryName();
 
         break;
 

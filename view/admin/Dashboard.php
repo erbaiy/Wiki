@@ -25,10 +25,10 @@
                 <ul class="sidebar_nav">
 
                     <li class="sidebar_item">
-                        <a href="index.php?route=condidat" class="sidebar_link"> <img src="assets/img/agents.svg" alt="icon">users</a>
+                        <a href="index.php?route=users" class="sidebar_link"> <img src="assets/img/agents.svg" alt="icon">users</a>
                     </li>
                     <li class="sidebar_item">
-                        <a href="index.php?route=offre" class="sidebar_link"> <img src="assets/img/task.svg" alt="icon">category</a>
+                        <a href="index.php?route=category" class="sidebar_link"> <img src="assets/img/task.svg" alt="icon">category</a>
                     </li>
 
                     <li class="sidebar_item">

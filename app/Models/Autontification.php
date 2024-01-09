@@ -27,6 +27,7 @@ class Autontification
         $query = $db->prepare("SELECT * FROM users WHERE username = ?");
         $query->execute([$user_name]);
 
+
         $user = $query->fetch(\PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
