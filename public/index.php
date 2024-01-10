@@ -76,6 +76,12 @@ switch ($router) {
         $objet->selectCategoryName();
 
         break;
+    case 'updateCategory':
+
+        $objet = new CategoryController();
+        $objet->updateCategory();
+
+        break;
 
     default:
         // Handle 404 or redirect to the default route

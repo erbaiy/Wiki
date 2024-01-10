@@ -35,4 +35,11 @@ class CategoryModel
         $query->execute([$id]);
         return $query->fetch(\PDO::FETCH_ASSOC);
     }
+    public function  updateCategory($name, $id)
+    {
+        $db = Database::connect();
+        $query = $db->prepare('UPDATE category set name=? WHERE category_id=? ');
+
+        return  $query->execute([$name, $id]);
+    }
 }

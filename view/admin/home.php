@@ -199,53 +199,40 @@
     </thead>
     <tbody>
         <?php
-        // dump($result);
-        // die();
         foreach ($result as $row) {
-
-
-
         ?>
             <tr style="border:#00000026 solid 1.3px;">
-
                 <th><?php echo $row["name"] ?></th>
-                <th>
-
-                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" href="/?route=selectCategoryName&id=<?php echo $row['category_id'] ?>"><i class="fa-solid fa-pencil"></i></a>
-                </th>
-                <th><a href="/?route=deleteCategory&id=<?php echo $row['category_id'] ?>"><i class="fa-solid fa-trash"></a></i></th>
-
-
-                <!-- Button trigger modal -->
-
-
-                <!-- Modal update -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">update category</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="post">
-                                    <input type="text" name='inpCategory' value="<?php echo $x['name'];
-                                                                                    dump($x)
-                                                                                    ?>">
+                <td>
+                    <div class="modal fade" id="exampleModal_<?php echo $row['category_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Category</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="?route=updateCategory" method="post">
+                                        <input type="hidden" name="categoryid" id="" value="<?php echo $row['category_id']; ?>">
+                                        <input type="text" name="inpCategory" value="<?php echo $row['name']; ?>">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                                </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <!-- -------------------- -->
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" name=save class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </td>
+                <th>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['category_id']; ?>" href="#"><i class="fa-solid fa-pencil"></i></a>
+                </th>
+                <th>
+                    <a href="/?route=deleteCategory&id=<?php echo $row['category_id']; ?>"><i class="fa-solid fa-trash"></i></a>
+                </th>
             </tr>
-
         <?php
-
         }
         ?>
     </tbody>
@@ -261,6 +248,9 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="../public//assets/dashboard.js"></script>
+    <script>
+
+    </script>
 </body>
 
 </html>

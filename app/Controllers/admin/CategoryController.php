@@ -45,15 +45,48 @@ class CategoryController
     public function selectCategoryName()
     {
 
+        $object = new CategoryModel();
+        $x = $object->selectCategoryName(2);
+        dump($x);
+        die();
 
         if (isset($_GET['id'])) {
+
             $object = new CategoryModel();
             $x = $object->selectCategoryName($_GET['id']);
+            // dump($x);
+            // die();
+
+
             if ($x) {
                 echo 'select secess';
             } else {
                 echo 'eroro';
             }
+            require('../view/admin/home.php');
+        }
+    }
+    public function updateCategory()
+    {
+
+
+        if (isset($_POST['save'])) {
+            $object = new CategoryModel();
+
+            $update = $object->updateCategory($_POST['inpCategory'], $_POST['categoryid']);
+            if ($update) {
+                // dump($_POST['inpCategory']);
+                header('location:/?route=selectData');
+                // echo 'update secess';
+                // dump($_POST['Categoryid']);
+                // die();
+            } else {
+                echo "error";
+            }
+
+
+
+            // require('../view/admin/home.php');
         }
     }
 }
