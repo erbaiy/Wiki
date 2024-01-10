@@ -27,7 +27,7 @@
 
         .category {
             background-color: #f5deb31c;
-            width: 300px;
+            width: 50%;
             height: 500px;
             border: #00000026 solid 2px;
             border-radius: 5px;
@@ -193,7 +193,13 @@
 
         </th>
         <th>
-            action
+            ______________________
+        </th>
+        <th>
+            update
+        </th>
+        <th>
+            delete
         </th>
     </tr>
     </thead>
@@ -240,16 +246,163 @@
     <div class="body"></div>
 
     </div>
-    <div class="category"></div>
-    <div class="category"></div>
+    <div class="category">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Category id</th>
+                    <th scope="col">Category name</th>
+
+                    <th scope="col">edite</th>
+                    <th scope="col">delete</th>
+                </tr>
+            </thead>
+            <tbody id="studentdata">
+
+
+            </tbody>
+        </table>
+    </div>
+
     </section>
 
     </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="../public//assets/dashboard.js"></script>
+    <script src="../public/assets/dashboard.js"></script>
     <script>
+        // $(document).ready(function() {
+        //     getData();
+        // });
 
+        // function getData() {
+        //     $.ajax({
+        //         url: "?route=getTags",
+        //         type: "GET",
+        //         success: function(response) {
+        //             $.each(JSON.parse(response), function(key, value) {
+        //                 $('#studentdata').append('<tr>' +
+        //                     '<td>' + value['tag_id'] + '</td>' +
+        //                     '<td>' + value['tag_name'] + '</td>' +
+        //                     '<td>' + '<a href="/?route=deleteCategory&id=' + value['tag_id'] + '"><i class="fa-solid fa-pencil"></i></a>' + '</td>' +
+        //                     '<td>' + '<a href="/?route=deleteTags&id=' + value['tag_id'] + '"><i class="fa-solid fa-trash"></i></a>' + '</td>' +
+        //                     '</tr>');
+        //             });
+        //         }
+        //     });
+        // }
+
+        <!-- JavaScript code -->
+
+        // $(document).ready(function() {
+        //     getData();
+        // });
+
+        // function getData() {
+        //     $.ajax({
+        //         url: "?route=getTags",
+        //         type: "GET",
+        //         success: function(response) {
+        //             $.each(JSON.parse(response), function(key, value) {
+        //                 $('#studentdata').append('<tr>' +
+        //                     '<td>' + value['tag_id'] + '</td>' +
+        //                     '<td>' + value['tag_name'] + '</td>' +
+        //                     '<td>' + '<a href="?route=deleteCategory&id=' + value['tag_id'] + '"><i class="fa-solid fa-pencil"></i></a>' + '</td>' +
+        //                     '<td>' + '<a href="/?route=deleteCategory&id=' + value['tag_id'] + ' class="delete-btn" data-id=""><i class="fa-solid fa-trash"></i></a>' + '</td>' +
+        //                     '</tr>');
+        //             });
+        //         }
+        //     });
+        // }
+
+        // // Delete button click event
+        // $(document).on('click', '.delete-btn', function() {
+        //     var id = $(this).data('id');
+        //     deleteData(id);
+        // });
+
+        // // Function to delete data
+        // function deleteData(id) {
+        //     $.ajax({
+        //         url: "?route=deleteTags&id=" + id,
+        //         type: "GET",
+        //         success: function(response) {
+        //             // Remove the deleted row from the table
+        //             $('tr[data-id="' + id + '"]').remove();
+
+        //             // Show success message
+        //             alert('Record deleted successfully!');
+        //         }
+        //     });
+        // }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            getData();
+        });
+
+        function getData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '?route=getTags', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    response.forEach(function(value, index) {
+                        var row = '<tr data-id="' + value.tag_id + '">' +
+                            '<td>' + value.tag_id + '</td>' +
+                            '<td>' + value.tag_name + '</td>' +
+                            '<td>' + '<button data-bs-target="#modal' + index + '" data-bs-toggle="modal"><i class="fa-solid fa-pencil"></i></button>' + '</td>' +
+                            '<td>' + '<button onclick="deleteData(' + value.tag_id + ')" class="delete-btn"><i class="fa-solid fa-trash"></i></button>' + '</td>' +
+                            '<div class="modal fade" id="modal' + index + '" tabindex="-1" aria-labelledby="modal' + index + 'Label" aria-hidden="true">' +
+                            '<div class="modal-dialog">' +
+                            '<div class="modal-content">' +
+                            '<div class="modal-header">' +
+                            '<h1 class="modal-title fs-5" id="modal' + index + 'Label">Update Category</h1>' +
+                            '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                            '</div>' +
+                            '<div class="modal-body">' +
+                            '<form action="?route=updateCategory" method="post">' +
+
+                            '<input type="hidden" name="Tagid" value="' + value.tag_id + '">' +
+                            '<input type="text" name="inpTag" value="' + value.tag_name + '">' +
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
+                            '<button type="submit" name="submit"  class="btn btn-primary">Save </button>' +
+                            '</form>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</tr>';
+                        document.getElementById('studentdata').insertAdjacentHTML('beforeend', row);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+
+
+        function deleteData(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '?route=deleteTags&id=' + id, true);
+            console.log(id);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var row = document.querySelector('tr[data-id="' + id + '"]');
+                    console.log(row);
+                    if (row) {
+                        row.remove();
+
+                    }
+                    alert('Record deleted successfully!');
+
+                }
+            };
+            xhr.send();
+        }
     </script>
 </body>
 

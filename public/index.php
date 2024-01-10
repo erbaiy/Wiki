@@ -8,6 +8,7 @@ use App\Controllers\AutontificationController;
 use Symfony\Component\VarDumper\VarDumper;
 
 use App\Controllers\admin\CategoryController;
+use App\Controllers\admin\TagsController;
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
@@ -76,13 +77,26 @@ switch ($router) {
         $objet->selectCategoryName();
 
         break;
+        // TAGS_________________
+
+    case 'getTags':
+
+        $objet = new TagsController();
+        $objet->getTags();
+
+        break;
+    case 'deleteTags':
+
+        $objet = new TagsController();
+        $objet->deleteTags();
+
+        break;
     case 'updateCategory':
 
-        $objet = new CategoryController();
+        $objet = new TagsController();
         $objet->updateCategory();
 
         break;
-
     default:
         // Handle 404 or redirect to the default route
         header('HTTP/1.0 404 Not Found');
