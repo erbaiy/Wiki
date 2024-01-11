@@ -25,10 +25,10 @@ class TagsModel
 
         $db = null;
     }
-    public function updateCategory($tag, $id)
+    public function updateTags($tag, $id)
     {
         $db = Database::connect();
-        $query = $db->prepare("UPDATE tag  set name=?  WHERE tag_name=? ");
+        $query = $db->prepare("UPDATE tag  set tag_name=?  tag_id =? ");
 
         return   $query->execute([$tag, $id]);
 

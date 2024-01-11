@@ -28,13 +28,22 @@ class TagsController
             $tags->deleteTags($_GET['id']);
         }
     }
-    public function updateCategory()
+    public function updateTags()
     {
+        echo 'work';
+        dump($_POST['inpTag']);
+        echo 'youness';
+        // die();   
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+            $tagId = $_POST["Tagid"];
+            $tagName = $_POST["inpTag"];
 
-        if (isset($_POST['submit'])) {
+            // die();
+
+
             $tags = new TagsModel();
-            dump($_POST['inpTag']);
-            $tags->updateCategory($_POST['inpTag'], $_POST['Tagid']);
+
+            $tags->updateTags($_POST['inpTag'], $_POST['Tagid']);
         }
     }
 }

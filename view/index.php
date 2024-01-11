@@ -130,6 +130,34 @@
 					</ul>
 				</div>
 			</article> -->
+            <?php
+            foreach ($wiki as $col) {
+                // dump($col);
+                // die();
+            ?>
+
+
+                <article class="postcard light yellow">
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="https://picsum.photos/300/300" alt="Image Title" />
+                    </a>
+                    <div class="postcard__text t-dark">
+                        <h3 class="postcard__title yellow"><a href="#"><?php echo $col["wiki_title"] ?></a></h3>
+                        <div class="postcard__subtitle small">
+                            <time datetime="2020-05-25 12:00:00">
+                                <i class="fas fa-calendar-alt mr-2"><?php echo $col["date_create"] ?></i>
+                            </time>
+                        </div>
+                        <div class="postcard__bar"></div>
+                        <div class="postcard__preview-txt"><?php echo $col["wiki_content"] ?></div>
+                        <ul class="postcard__tagbox">
+                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["author_id"] ?></li>
+                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>category<?php echo $col["name"] ?></li>
+
+                        </ul>
+                    </div>
+                </article>
+            <?php } ?>
         </div>
     </section>
 

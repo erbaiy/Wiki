@@ -26,7 +26,10 @@ class CategoryController
 
             $result = $object->addCategory($_POST['category']);
             if ($result) {
+
                 header('location:/?route=selectData');
+                // dump($_POST['category']);
+                // die();
             }
         }
     }
@@ -47,8 +50,8 @@ class CategoryController
 
         $object = new CategoryModel();
         $x = $object->selectCategoryName(2);
-        dump($x);
-        die();
+        // dump($x);
+        // die();
 
         if (isset($_GET['id'])) {
 
@@ -75,6 +78,7 @@ class CategoryController
 
             $update = $object->updateCategory($_POST['inpCategory'], $_POST['categoryid']);
             if ($update) {
+                echo  'younse';
                 // dump($_POST['inpCategory']);
                 header('location:/?route=selectData');
                 // echo 'update secess';

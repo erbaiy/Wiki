@@ -9,11 +9,14 @@ use Symfony\Component\VarDumper\VarDumper;
 
 use App\Controllers\admin\CategoryController;
 use App\Controllers\admin\TagsController;
+use App\Controllers\author\WikiController;
+
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
     case 'home':
-        require('../view/index.php');
+        $objet = new WikiController();
+        $objet->WikiHome();
         break;
     case 'admin':
         require('../view/admin/home.php');
@@ -38,12 +41,7 @@ switch ($router) {
 
         $register->getlogin();
 
-        break;
-    case 'author':
 
-        require('../view/author/author.php');
-        break;
-        break;
     case 'tags':
 
         require('../view/admin/tags.php');
@@ -77,6 +75,12 @@ switch ($router) {
         $objet->selectCategoryName();
 
         break;
+    case 'updateCategory':
+
+        $objet = new CategoryController();
+        $objet->updateCategory();
+
+        break;
         // TAGS_________________
 
     case 'getTags':
@@ -91,10 +95,31 @@ switch ($router) {
         $objet->deleteTags();
 
         break;
-    case 'updateCategory':
+    case 'updateTags':
 
         $objet = new TagsController();
-        $objet->updateCategory();
+
+        $objet->updateTags();
+
+
+
+        break;
+    case 'addWiki':
+
+        $objet = new WikiController();
+
+        $objet->addWiki();
+
+
+
+        break;
+        break;
+    case 'author':
+        $objet = new WikiController();
+
+        $objet->selectWiki();
+
+        // 
 
         break;
     default:

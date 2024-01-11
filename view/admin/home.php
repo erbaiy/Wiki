@@ -249,9 +249,10 @@
     <div class="category">
         <table class="table">
             <thead>
+                <tr>ags</tr>
                 <tr>
-                    <th scope="col">Category id</th>
-                    <th scope="col">Category name</th>
+                    <th scope="col">tag id</th>
+                    <th scope="col">tag name</th>
 
                     <th scope="col">edite</th>
                     <th scope="col">delete</th>
@@ -337,7 +338,6 @@
         //     });
         // }
 
-
         document.addEventListener('DOMContentLoaded', function() {
             getData();
         });
@@ -349,41 +349,47 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
                     response.forEach(function(value, index) {
-                        var row = '<tr data-id="' + value.tag_id + '">' +
-                            '<td>' + value.tag_id + '</td>' +
-                            '<td>' + value.tag_name + '</td>' +
-                            '<td>' + '<button data-bs-target="#modal' + index + '" data-bs-toggle="modal"><i class="fa-solid fa-pencil"></i></button>' + '</td>' +
-                            '<td>' + '<button onclick="deleteData(' + value.tag_id + ')" class="delete-btn"><i class="fa-solid fa-trash"></i></button>' + '</td>' +
-                            '<div class="modal fade" id="modal' + index + '" tabindex="-1" aria-labelledby="modal' + index + 'Label" aria-hidden="true">' +
-                            '<div class="modal-dialog">' +
-                            '<div class="modal-content">' +
-                            '<div class="modal-header">' +
-                            '<h1 class="modal-title fs-5" id="modal' + index + 'Label">Update Category</h1>' +
-                            '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
-                            '</div>' +
-                            '<div class="modal-body">' +
-                            '<form action="?route=updateCategory" method="post">' +
-
-                            '<input type="hidden" name="Tagid" value="' + value.tag_id + '">' +
-                            '<input type="text" name="inpTag" value="' + value.tag_name + '">' +
-                            '</div>' +
-                            '<div class="modal-footer">' +
-                            '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>' +
-                            '<button type="submit" name="submit"  class="btn btn-primary">Save </button>' +
-                            '</form>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</tr>';
+                        var row = `
+                    <tr data-id="${value.tag_id}">
+                        <td>${value.tag_id}</td>
+                        <td>${value.tag_name}</td>
+                        <td>
+                            <button data-bs-target="#modal${index}" data-bs-toggle="modal">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick="deleteData(${value.tag_id})" class="delete-btn">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <div class="modal fade" id="modal${index}" tabindex="-1" aria-labelledby="modal${index}Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="modal${index}Label">Update Category</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form${index}">
+                                        <input type="hidden" name="Tagid" value="${value.tag_id}">
+                                        <input type="text" name="inpTag" value="${value.tag_name}">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" onclick="updateData(${index})" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
                         document.getElementById('studentdata').insertAdjacentHTML('beforeend', row);
                     });
                 }
             };
             xhr.send();
         }
-
-
 
         function deleteData(id) {
             var xhr = new XMLHttpRequest();
@@ -395,13 +401,32 @@
                     console.log(row);
                     if (row) {
                         row.remove();
-
                     }
                     alert('Record deleted successfully!');
-
                 }
             };
             xhr.send();
+        }
+
+        function updateData(index) {
+
+            console.log(name);
+            var form = document.getElementById('form' + index);
+            var id = form.elements['Tagid'].value;
+            var name = form.elements['inpTag'].value;
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '?route=updateTags', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Data updated successfully!');
+                    // Handle any additional actions after successful update
+                }
+            };
+            var params = 'id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(name);
+            xhr.send(params);
         }
     </script>
 </body>
