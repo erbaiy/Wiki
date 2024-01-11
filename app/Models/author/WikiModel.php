@@ -10,9 +10,9 @@ class WikiModel
     public function selectWiki()
     {
         $db =  Database::connect();
-        $query = $db->prepare('SELECT * FROM wiki ');
-        // $query = $db->prepare('SELECT * FROM wiki inner JOIN category on wiki.author_id=category.category_id INNER JOIN users on users.user_id=wiki.author_id INNER JOIN wiki_tag on wiki_tag.wiki_id=wiki.wiki_id INNER JOIN tag on tag.tag_id=wiki_tag.tag_id');
-        // $query->execute();
+        // $query = $db->prepare('SELECT * FROM wiki ');
+        $query = $db->prepare("SELECT * FROM wiki INNER JOIN category ON wiki.category_id = category.category_id INNER JOIN users ON users.user_id = wiki.author_id INNER JOIN wiki_tag ON wiki_tag.wiki_id = wiki.wiki_id INNER JOIN tag ON tag.tag_id = wiki_tag.tag_id;");
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

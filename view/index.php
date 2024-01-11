@@ -151,8 +151,9 @@
                         <div class="postcard__bar"></div>
                         <div class="postcard__preview-txt"><?php echo $col["wiki_content"] ?></div>
                         <ul class="postcard__tagbox">
-                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["author_id"] ?></li>
+                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["username"] ?></li>
                             <li class="tag__item"><i class="fas fa-clock mr-2"></i>category<?php echo $col["name"] ?></li>
+                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags<?php echo $col["tag_name"] ?></li>
 
                         </ul>
                     </div>
