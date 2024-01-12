@@ -249,6 +249,40 @@
     <div class="category">
         <table class="table">
             <thead>
+                <tr><!-- Button to trigger the modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
+                        Add New Tag
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addTagModalLabel">Add New Tag</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <form id="addTagForm" action="?route=addTags" method="post">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="tagName" class="form-label">Tag Name</label>
+                                            <input type="text" name="tagName" class="form-control" id="tagName" name="tagName" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" name="submit" class="btn btn-primary" form="addTagForm">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
                 <tr>ags</tr>
                 <tr>
                     <th scope="col">tag id</th>
@@ -294,49 +328,6 @@
         //     });
         // }
 
-        <!-- JavaScript code -->
-
-        // $(document).ready(function() {
-        //     getData();
-        // });
-
-        // function getData() {
-        //     $.ajax({
-        //         url: "?route=getTags",
-        //         type: "GET",
-        //         success: function(response) {
-        //             $.each(JSON.parse(response), function(key, value) {
-        //                 $('#studentdata').append('<tr>' +
-        //                     '<td>' + value['tag_id'] + '</td>' +
-        //                     '<td>' + value['tag_name'] + '</td>' +
-        //                     '<td>' + '<a href="?route=deleteCategory&id=' + value['tag_id'] + '"><i class="fa-solid fa-pencil"></i></a>' + '</td>' +
-        //                     '<td>' + '<a href="/?route=deleteCategory&id=' + value['tag_id'] + ' class="delete-btn" data-id=""><i class="fa-solid fa-trash"></i></a>' + '</td>' +
-        //                     '</tr>');
-        //             });
-        //         }
-        //     });
-        // }
-
-        // // Delete button click event
-        // $(document).on('click', '.delete-btn', function() {
-        //     var id = $(this).data('id');
-        //     deleteData(id);
-        // });
-
-        // // Function to delete data
-        // function deleteData(id) {
-        //     $.ajax({
-        //         url: "?route=deleteTags&id=" + id,
-        //         type: "GET",
-        //         success: function(response) {
-        //             // Remove the deleted row from the table
-        //             $('tr[data-id="' + id + '"]').remove();
-
-        //             // Show success message
-        //             alert('Record deleted successfully!');
-        //         }
-        //     });
-        // }
 
         document.addEventListener('DOMContentLoaded', function() {
             getData();
@@ -364,7 +355,13 @@
                             </button>
                         </td>
                     </tr>
-                    <div class="modal fade" id="modal${index}" tabindex="-1" aria-labelledby="modal${index}Label" aria-hidden="true">
+                    <tr>
+                        <div class="modal fade" id="modal${index}" tabindex="-1" aria-labelledby="modal${index}Label" aria-hidden="true">
+                            <form id="form${index}"></form>
+                        </div>
+                    </tr>`;
+                        document.getElementById('studentdata').insertAdjacentHTML('beforeend', row);
+                        document.getElementById('form' + index).innerHTML = `
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -372,20 +369,17 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="form${index}">
-                                        <input type="hidden" name="Tagid" value="${value.tag_id}">
-                                        <input type="text" name="inpTag" value="${value.tag_name}">
-                                    </form>
+                                        <input type="hidden" name="Tagid" value="${value.tag_id}"/>
+                                        <input type="text" name="inpTag" value="${value.tag_name}"/>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" onclick="updateData(${index})" class="btn btn-primary">Save</button>
+                                    <button name=submit type="button" onclick="updateData(${index})" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>`;
-                        document.getElementById('studentdata').insertAdjacentHTML('beforeend', row);
+                        </div>`;
                     });
+
                 }
             };
             xhr.send();
@@ -408,24 +402,53 @@
             xhr.send();
         }
 
-        function updateData(index) {
+        // function updateData(index) {
 
-            console.log(name);
+        //     console.log(index);
+        //     var form = document.getElementById('form' + index);
+        //     var id = form.elements['Tagid'].value;
+        //     var name = form.elements['inpTag'].value;
+        //     // console.log(fo)
+
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('POST', '?route=updateTags', true);
+        //     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        //     var params = 'id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(name);
+
+        //     xhr.onreadystatechange = function() {
+        //         if (xhr.readyState === 4 && xhr.status === 200) {
+        //             // alert('Data updated successfully!');
+        //             console.log(params);
+        //         }
+        //     };
+
+        //     xhr.send(params);
+        // }
+        function updateData(index) {
+            console.log(index);
             var form = document.getElementById('form' + index);
             var id = form.elements['Tagid'].value;
             var name = form.elements['inpTag'].value;
 
+            var params = 'id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(name);
 
+            // Redirect to the updateTags route
+
+            window.location.href = '?route=updateTags&id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(name);
+
+            // Optional: Perform an AJAX request if needed
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '?route=updateTags', true);
+            xhr.open('get', '?route=updateTags', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert('Data updated successfully!');
-                    // Handle any additional actions after successful update
+                    // alert('Data updated successfully!');
+                    console.log(params);
                 }
             };
-            var params = 'id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(name);
+
             xhr.send(params);
         }
     </script>

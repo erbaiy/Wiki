@@ -10,8 +10,9 @@ class WikiModel
     public function selectWiki()
     {
         $db =  Database::connect();
-        // $query = $db->prepare('SELECT * FROM wiki ');
-        $query = $db->prepare("SELECT * FROM wiki INNER JOIN category ON wiki.category_id = category.category_id INNER JOIN users ON users.user_id = wiki.author_id INNER JOIN wiki_tag ON wiki_tag.wiki_id = wiki.wiki_id INNER JOIN tag ON tag.tag_id = wiki_tag.tag_id;");
+        // $query = $db->prepare('SELECT * FROM wiki  ');
+        // $query = $db->prepare("SELECT * FROM wiki INNER JOIN category ON wiki.category_id = category.category_id INNER JOIN users ON users.user_id = wiki.author_id INNER JOIN wiki_tag ON wiki_tag.wiki_id = wiki.wiki_id INNER JOIN tag ON tag.tag_id = wiki_tag.tag_id");
+        $query = $db->prepare("SELECT * FROM wiki LEFT JOIN category ON wiki.category_id = category.category_id LEFT JOIN users ON users.user_id = wiki.author_id LEFT JOIN wiki_tag ON wiki_tag.wiki_id = wiki.wiki_id LEFT JOIN tag ON tag.tag_id = wiki_tag.tag_id");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -23,6 +24,13 @@ class WikiModel
         $query->execute();
         $tags = $query->fetchAll(PDO::FETCH_ASSOC);
         return $tags;
+    }
+    public function deleteWiki($id)
+    {
+        $db =  Database::connect();
+        $query = $db->prepare('DELETE FROM wiki where wiki_id=?');
+        $query->execute([$id]);
+        return   $query->fetchAll(PDO::FETCH_ASSOC);
     }
     public function selectCategory()
     {
@@ -40,5 +48,11 @@ class WikiModel
         $result = $query->execute([$wiki_title, $wiki_content, $date_create, $author_id, $category_id]);
         $db = null;
         return $result;
+    }
+    public function search($title)
+    {
+        $db = Database::connect();
+        $query = $db->prepare('SELECT *FROM wiki where wiki_title=? ');
+        return $query->execute([$title]);
     }
 }

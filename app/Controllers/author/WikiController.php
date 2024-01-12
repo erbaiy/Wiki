@@ -6,6 +6,17 @@ use App\Models\author\WikiModel;
 
 class WikiController
 {
+    public function deleteWiki()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $objet = new WikiModel();
+            $data = $objet->deleteWiki($id);
+            if ($data) {
+                header('Location:../index.php');
+            }
+        }
+    }
 
     public function selectWiki()
     {
@@ -49,6 +60,22 @@ class WikiController
             } else {
                 echo 'add failed';
             }
+        }
+    }
+
+    public function search()
+    {
+        $title = $_GET['inp'];
+        // dump($_GET);
+        // die();
+        $search = new WikiModel();
+        $result = $search->search($title);
+
+
+        if ($result) {
+            echo 'add secess';
+        } else {
+            echo 'add failed';
         }
     }
 }

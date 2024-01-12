@@ -13,7 +13,6 @@ class CategoryController
         $result = $object->selectData();
         // dump($result);
 
-
         require('../view/admin/home.php');
     }
     public function addCategory()
@@ -22,7 +21,7 @@ class CategoryController
         if (isset($_POST['submit'])) {
 
             $object = new CategoryModel();
-            $object->addCategory($_POST['category']);
+
 
             $result = $object->addCategory($_POST['category']);
             if ($result) {

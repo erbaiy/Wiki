@@ -32,7 +32,7 @@
     <div class="container">
         <div class="wrapper">
             <div class="title"><span>Login Form</span></div>
-            <h1></h1>&
+            <h1></h1>
             <form action="?route=login" method="POST">
                 <div class="row">
                     <i class="fas fa-user"></i>

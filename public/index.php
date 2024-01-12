@@ -98,11 +98,12 @@ switch ($router) {
     case 'updateTags':
 
         $objet = new TagsController();
-
         $objet->updateTags();
+        break;
+    case 'addTags':
 
-
-
+        $objet = new TagsController();
+        $objet->addTags();
         break;
     case 'addWiki':
 
@@ -116,11 +117,15 @@ switch ($router) {
         break;
     case 'author':
         $objet = new WikiController();
-
         $objet->selectWiki();
-
-        // 
-
+        break;
+    case 'deleteWiki':
+        $objet = new WikiController();
+        $objet->deleteWiki();
+        break;
+    case 'searchWiki':
+        $objet = new WikiController();
+        $objet->search();
         break;
     default:
         // Handle 404 or redirect to the default route

@@ -29,6 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
 </head>
 
 <body>
@@ -152,8 +153,8 @@
                         <div class="postcard__preview-txt"><?php echo $col["wiki_content"] ?></div>
                         <ul class="postcard__tagbox">
                             <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["username"] ?></li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>category<?php echo $col["name"] ?></li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags<?php echo $col["tag_name"] ?></li>
+                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>category:<?php echo $col["name"] ?></li>
+                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags:<?php echo $col["tag_name"] ?></li>
 
                         </ul>
                     </div>
@@ -167,14 +168,19 @@
 
 
     <footer>
-        <p>© 2023 JobEase </p>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Wiki. All rights reserved.</p>
+        </div>
     </footer>
+
 
     <script>
         function search() {
             var searchTerm = document.getElementById('keywords').value;
+            console.log(searchTerm);
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'index.php?route=search&term=' + searchTerm, true);
+            xhr.open('GET', '?route=searchWiki&inp=' + searchTerm, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById('result').innerHTML = xhr.responseText;
@@ -182,7 +188,21 @@
             };
             xhr.send();
         }
+
         search();
+
+        // function search() {
+        //     let xml = new XMLHttpRequest();
+        //     let inp = document.getElementById('keywords').value;
+        //     console.log(inp);
+        //     open('post', '?route=searchWiki&inp=' + inp, true);
+
+        //     xml.onreadystatechange = function() {
+        //         if (xml.readyState === 4 & xml.status == 200) {
+        //             document.getElementById('result').innerHTML = xml.response;
+        //         }
+        //     }
+        // }
     </script>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

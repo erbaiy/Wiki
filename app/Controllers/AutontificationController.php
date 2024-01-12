@@ -82,13 +82,14 @@ class AutontificationController
 
 
             if ($user && password_verify($password, $user['password']) && $username == $user['username']) {
-                $_SESSION = $user['user_id'];
-                // VarDumper::dump($_SESSION);
+                $_SESSION['user_id'] = $user['user_id'];
+
+                // dump($_SESSION['user_id']);
                 // die();
                 if ($user['role'] == 'admin') {
                     require('../view/admin/home.php');
                 } elseif ($user['role'] == 'author') {
-                    echo 'author';
+                    require('../view/index.php');
                 }
             } else {
                 echo 'error';

@@ -30,20 +30,39 @@ class TagsController
     }
     public function updateTags()
     {
-        echo 'work';
-        dump($_POST['inpTag']);
-        echo 'youness';
-        // die();   
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-            $tagId = $_POST["Tagid"];
-            $tagName = $_POST["inpTag"];
-
-            // die();
-
-
+        // dump($_SERVER['REQUEST_METHOD']);
+        // die();
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id'];
+            $name = $_GET['name'];
             $tags = new TagsModel();
+            $response = $tags->updateTags($name, $id);
+            // dump($);
+            // die();
+            if ($response) {
+                header('location:?route=selectData');
+                // header('Content-typ:application/json');
+                // echo json_encode($response);
+            } else {
+                http_response_code(404);
+            }
 
-            $tags->updateTags($_POST['inpTag'], $_POST['Tagid']);
+            // $response = array('
+        }
+    }
+    public function addTags()
+    {
+        if (isset($_POST['submit'])) {
+            $name = $_POST['tagName'];
+            $tags = new TagsModel();
+            $addTags = $tags->addTags($name);
+            if ($addTags) {
+                header('location:?route=selectData');
+            } else {
+                http_response_code(404);
+            }
+
+            // $response = array('
         }
     }
 }

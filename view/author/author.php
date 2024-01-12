@@ -25,7 +25,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($wiki as $row) { ?>
+                <?php
+                // dump($wiki);
+                // die();
+                foreach ($wiki as $row) {
+                ?>
                     <tr>
                         <td><?= $row['wiki_title'] ?></td>
                         <td><?= $row['wiki_content'] ?></td>
@@ -33,8 +37,10 @@
                         <td><?= $row['author_id'] ?></td>
                         <td><?= $row['category_id'] ?></td>
                         <td>
-                            <a href="?route=editWiki&id=<?= $row['wiki_id'] ?>">Edit</a>
-                            <a href="?route=deleteWiki&id=<?= $row['wiki_id'] ?>">Delete</a>
+                            <form action="?route=deleteWiki" method="get">
+                                <a href="?route=editWiki&id=<?= $row['wiki_id'] ?>">Edit</a>
+                                <a href="?route=deleteWiki&id=<?= $row['wiki_id'] ?>">Delete</a>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -72,7 +78,8 @@
                         </div>
                         <div class="form-group">
                             <label for="author_id">Author ID:</label>
-                            <input type="text" class="form-control" name="author_id" id="author_id" required>
+                            <input type="hidden" class="form-control" name="author_id" id="author_id" value="<?php echo $_SESSION['user_id'];
+                                                                                                                ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="category">Category :</label>
