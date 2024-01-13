@@ -33,6 +33,7 @@ CREATE TABLE tag (
 );
 
 CREATE TABLE wikiTag (
+    wikiTag_id int PRIMARY KEY AUTO_INCREMENT,
     wiki_id INT,
     tag_id INT,
     PRIMARY KEY (wiki_id, tag_id),

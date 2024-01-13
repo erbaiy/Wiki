@@ -70,6 +70,13 @@ class AutontificationController
     {
         require('../view/login.php');
     }
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header('Location:?route=home');
+        exit();
+    }
     public function login()
     {
         $userModel = new Autontification();
@@ -87,9 +94,11 @@ class AutontificationController
                 // dump($_SESSION['user_id']);
                 // die();
                 if ($user['role'] == 'admin') {
-                    require('../view/admin/home.php');
+                    // require('../view/admin/home.php');
+                    header('Location:?route=selectData');
                 } elseif ($user['role'] == 'author') {
-                    require('../view/index.php');
+                    // require('../view/index.php');
+                    header('Location:?route=home');
                 }
             } else {
                 echo 'error';

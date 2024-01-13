@@ -38,7 +38,7 @@
                         <td><?= $row['category_id'] ?></td>
                         <td>
                             <form action="?route=deleteWiki" method="get">
-                                <a href="?route=editWiki&id=<?= $row['wiki_id'] ?>">Edit</a>
+                                <a href="?route=selectWikiforUpdate&id=<?= $row['wiki_id'] ?>">Edit</a>
                                 <a href="?route=deleteWiki&id=<?= $row['wiki_id'] ?>">Delete</a>
                             </form>
                         </td>

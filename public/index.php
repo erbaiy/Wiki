@@ -10,13 +10,17 @@ use Symfony\Component\VarDumper\VarDumper;
 use App\Controllers\admin\CategoryController;
 use App\Controllers\admin\TagsController;
 use App\Controllers\author\WikiController;
-
+use App\Models\Autontification;
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
     case 'home':
         $objet = new WikiController();
         $objet->WikiHome();
+        break;
+    case 'logout':
+        $objet = new AutontificationController();
+        $objet->logout();
         break;
     case 'admin':
         require('../view/admin/home.php');
@@ -126,6 +130,14 @@ switch ($router) {
     case 'searchWiki':
         $objet = new WikiController();
         $objet->search();
+        break;
+    case 'selectWikiforUpdate':
+        $objet = new WikiController();
+        $objet->selectWikiforUpdate();
+        break;
+    case 'updatWiki':
+        $objet = new WikiController();
+        $objet->updatWiki();
         break;
     default:
         // Handle 404 or redirect to the default route

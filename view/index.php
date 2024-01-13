@@ -30,21 +30,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
+
+
 </head>
 
 <body>
+
     <header>
-
-
-        <nav class="navbar navbar-expand-md navbar-dark">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container">
                 <!-- Brand/logo -->
                 <a class="navbar-brand" href="#">
-                    <i class="fas fa-code"></i>
-                    <h1>Wiki™ &nbsp &nbsp</h1>
+                    <img src="https://tse4.mm.bing.net/th?id=OIP.IdLwnRtdlKuifzEMNBxwJgHaEL&pid=Api&P=0&h=180" alt="Wiki Logo" width="30" height="30" class="d-inline-block align-top">
+                    <span class="ml-2">Wiki™</span>
                 </a>
 
-                <!-- Toggler/collapsibe Button -->
+                <!-- Toggler/collapsible Button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,26 +57,26 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="index.php?route=author">Author</a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                language
+                                Language
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">FR</a>
                                 <a class="dropdown-item" href="#">EN</a>
                             </div>
                         </li>
-                        <span class="nav-item active">
+                        <li class="nav-item active">
                             <a class="nav-link" href="#">EN</a>
-                        </span>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?route=login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?route=logout">logout</a>
+                            <a class="nav-link" href="index.php?route=getlogin">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?route=logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -132,9 +133,9 @@
 				</div>
 			</article> -->
             <?php
+
             foreach ($wiki as $col) {
-                // dump($col);
-                // die();
+
             ?>
 
 
@@ -178,11 +179,13 @@
     <script>
         function search() {
             var searchTerm = document.getElementById('keywords').value;
-            console.log(searchTerm);
+            // console.log(searchTerm);
+
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '?route=searchWiki&inp=' + searchTerm, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
+                    // console.log(xhr.responseText);
                     document.getElementById('result').innerHTML = xhr.responseText;
                 }
             };
