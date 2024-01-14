@@ -10,8 +10,40 @@
 </head>
 
 <body>
+    <nav class="navbar justify-content-space-between pe-4 ps-2 bg-dark">
+        <div>
+            <a href="?route=home">home</a>
+            <a href="?route=logout">logout </a>
+        </div>
+
+        <div class="navbar  gap-4">
+
+            <div class="">
+                <input type="search" class="search " placeholder="Search">
+                <img class="search_icon" src="assets/img/search.svg" alt="iconicon">
+            </div>
+            <!-- <img src="img/search.svg" alt="icon"> -->
+
+
+            <div class="name">
+                <p>Author</p>
+            </div>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-icon pe-md-0 position-relative" data-bs-toggle="dropdown">
+                        <img src="assets/img/photo_admin.svg" alt="icon">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end position-absolute">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <a class="dropdown-item" href="/PeoplePerTask/project/pages/index.html">Log out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <h1>Wiki Entries</h1>
+        Wiki Entries
 
         <table class="table">
             <thead>

@@ -27,8 +27,8 @@ class AutontificationController
     public function register()
     {
         if (isset($_POST['submit'])) {
-            $user_name = $_POST['user_name'];
-            $email = $_POST['email'];
+            $user_name = htmlspecialchars($_POST['user_name']);
+            $email = htmlspecialchars($_POST['email']);
             $password = $_POST['password'];
 
             $validationErrors = [];
@@ -77,31 +77,59 @@ class AutontificationController
         header('Location:?route=home');
         exit();
     }
+    // public function login()
+    // {
+    //     $userModel = new Autontification();
+    //     if (isset($_POST["submit"])) {
+    //         $username = htmlspecialchars($_POST['user_name']);
+    //         $username = filter_var($username, FILTER_SANITIZE_STRING);
+    //         $password = $_POST['password'];
+    //         $user = $userModel->login($username, $password);
+    //         if ($user && password_verify($password, $user['password']) && $username == $user['username']) {
+    //             $_SESSION['user_id'] = $user['user_id'];
+    //             if ($user['role'] == 'admin') {
+    //                 header('Location:?route=selectData');
+    //             } elseif ($user['role'] == 'author') {
+    //                 header('Location:?route=home');
+    //             }
+    //         } else {
+    //             echo 'error';
+    //             exit();
+    //         }
+    //     }
+    // }
     public function login()
     {
         $userModel = new Autontification();
 
         if (isset($_POST["submit"])) {
-            $username = $_POST['user_name'];
+            $username = htmlspecialchars($_POST['user_name'], ENT_QUOTES, 'UTF-8');
             $password = $_POST['password'];
+
+            // Sanitize and validate user input
+            $username = filter_var($username, FILTER_SANITIZE_STRING);
+            // ... perform additional validation and sanitization for $password
 
             $user = $userModel->login($username, $password);
 
-
-            if ($user && password_verify($password, $user['password']) && $username == $user['username']) {
+            if ($user && password_verify($password, $user['password']) && $username === $user['username']) {
+                // Set session variables securely
+                session_regenerate_id(true); // Regenerate session ID to prevent session fixation
                 $_SESSION['user_id'] = $user['user_id'];
 
-                // dump($_SESSION['user_id']);
-                // die();
-                if ($user['role'] == 'admin') {
-                    // require('../view/admin/home.php');
-                    header('Location:?route=selectData');
-                } elseif ($user['role'] == 'author') {
-                    // require('../view/index.php');
-                    header('Location:?route=home');
+                if ($user['role'] === 'admin') {
+                    header('Location: ?route=selectData');
+                    exit();
+                } elseif ($user['role'] === 'author') {
+                    header('Location: ?route=home');
+                    exit();
                 }
             } else {
-                echo 'error';
+                dump($username);
+                // Delay response for failed login attempts to mitigate brute force attacks
+                usleep(500000); // Sleep for 500ms
+                // Display a generic error message
+                echo 'Invalid username or password.';
                 exit();
             }
         }

@@ -17,30 +17,19 @@
             <div class="h-100">
                 <div class="sidebar_logo d-flex align-items-end">
 
-                    <a href="" class="nav-link text-white-50">Dashboard</a>
+                    <a href="" class="nav-link text-white-50">archife</a>
 
                 </div>
 
                 <ul class="sidebar_nav">
                     <li class="sidebar_item active" style="width: 100%;">
-                        <a href="dashboard.php" class="sidebar_link"> <img src="assets/img/overview.svg" alt="icon">Overview</a>
+                        <a href="?route=Dashboard" class="sidebar_link"> <img src="assets/img/overview.svg" alt="icon">Overview</a>
                     </li>
-
-                    <li class="sidebar_item">
-                        <a href="index.php?route=offre" class="sidebar_link"> <img src="assets/img/task.svg" alt="icon">tags</a>
-                    </li>
-
                     </li>
                     <li class="sidebar_item">
-                        <a href="#" class="sidebar_link"><img src="assets/img/articles.svg" alt="icon">ctegory</a>
+                        <a href="?route=selectData" class="sidebar_link"><img src="assets/img/articles.svg" alt="icon">wiki/tag</a>
                     </li>
-                    <li class="sidebar_item">
-                        <a href="#" class="sidebar_link"><img src="assets/img/articles.svg" alt="icon">wiki archife</a>
-                    </li>
-
-
                 </ul>
-
         </aside>
         <div class="main">
             <nav class="navbar justify-content-space-between pe-4 ps-2">
@@ -96,35 +85,42 @@
             </nav>
             <section class="Agents px-4">
                 <table class="agent table align-middle bg-white" style="min-width: 700px;">
-                    <thead>
-                        <a href="index.php?route=addJob"><button type="button" class="btn btn-secondary">add </button></a>
-                    </thead>
+
                     <thead class="bg-light">
                         <tr>
-                            <th>name</th>
-                            <th></th>
+                            <th>wiki tile </th>
+                            <th>wiki content</th>
+                            <th>date create</th>
+                            <th>date delete</th>
+                            <th>categoy id </th>
+                            <th>action
+
+                            </th>
+
 
                         </tr>
                         <thead>
                         <tbody>
+                            <?php
+                            foreach ($fetch as $row) {
+                            ?>
+                                <tr>
+                                    <th><?php echo $row['wiki_title'] ?></th>
+                                    <th><?php echo  $row['wiki_content'] ?></th>
+                                    <th><?php echo $row['date_create'] ?></th>
+                                    <th><?php echo $row['date_delete'] ?></th>
+                                    <th><?php echo $row['category_id'] ?></th>
+                                    <th>
+                                        <a href="?route=archifier&id=<?php echo $row['wiki_id'] ?>">archifier</a>
+                                        <a href="?route=disarchifier">disarchifier</a>
+                                    </th>
 
-
-
-
-
-
-
-
+                                </tr>
+                            <?php
+                            } ?>
                         </tbody>
-
-
-
-
                 </table>
-
-
             </section>
-
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

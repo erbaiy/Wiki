@@ -11,6 +11,8 @@ use App\Controllers\admin\CategoryController;
 use App\Controllers\admin\TagsController;
 use App\Controllers\author\WikiController;
 use App\Models\Autontification;
+use App\Controllers\admin\ArchifeController;
+use App\Controllers\admin\StatistiqueContrller;
 
 $router = isset($_GET['route']) ? $_GET['route'] : 'home';
 switch ($router) {
@@ -26,7 +28,8 @@ switch ($router) {
         require('../view/admin/home.php');
         break;
     case 'Dashboard':
-        require('../view/admin/Dashboard.php');
+        $objet = new StatistiqueContrller();
+        $objet->countTags();
         break;
 
     case 'register':
@@ -139,6 +142,19 @@ switch ($router) {
         $objet = new WikiController();
         $objet->updatWiki();
         break;
+
+
+
+        // wiki arichifi-----------------------
+    case 'archife':
+        $objet = new ArchifeController();
+        $objet->selectArchifier();
+        break;
+    case 'archifier':
+        $objet = new ArchifeController();
+        $objet->archifier();
+        break;
+
     default:
         // Handle 404 or redirect to the default route
         header('HTTP/1.0 404 Not Found');

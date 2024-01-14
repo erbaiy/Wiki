@@ -72,7 +72,7 @@
             <div class="h-100">
                 <div class="sidebar_logo d-flex align-items-end">
 
-                    <a href="" class="nav-link text-white-50">Dashboard</a>
+                    <a href="" class="nav-link text-white-50">home</a>
 
                 </div>
 
@@ -80,20 +80,11 @@
                     <li class="sidebar_item active" style="width: 100%;">
                         <a href="?route=Dashboard" class="sidebar_link"> <img src="assets/img/overview.svg" alt="icon">Overview</a>
                     </li>
+
                     <li class="sidebar_item">
-                        <a href="index.php?route=users" class="sidebar_link"> <img src="assets/img/agents.svg" alt="icon">users</a>
-                    </li>
-                    <li class="sidebar_item">
-                        <a href="index.php?route=tags" class="sidebar_link"> <img src="assets/img/task.svg" alt="icon">tags</a>
+                        <a href="index.php?route=archife" class="sidebar_link"> <img src="assets/img/task.svg" alt="icon">archife</a>
                     </li>
 
-                    </li>
-                    <li class="sidebar_item">
-                        <a href="?route=category" class="sidebar_link"><img src="assets/img/articles.svg" alt="icon">ctegory</a>
-                    </li>
-                    <li class="sidebar_item">
-                        <a href="#" class="sidebar_link"><img src="assets/img/articles.svg" alt="icon">wiki archife</a>
-                    </li>
 
 
                 </ul>
