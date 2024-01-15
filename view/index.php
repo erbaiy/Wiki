@@ -1,16 +1,3 @@
-<?php
-
-
-// include("../app/Models/connection.php");
-// require '../vendor/autoload.php';
-
-// $connection=new App\Models\Connection();
-// // $hash=password_hash(123,PASSWORD_DEFAULT);
-// // mysqli_query($connection->conn,"UPDATE users set password='$hash' where id=1");
-
-// $sql="SELECT * from jobs ";
-// $result=mysqli_query($connection->conn,$sql);
-?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -37,7 +24,7 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-light bg-light ">
             <div class="container">
                 <!-- Brand/logo -->
                 <a class="navbar-brand" href="#">
@@ -88,15 +75,6 @@
 
         <div class="form-group mb-2">
             <input type="text" id="keywords" placeholder="Keywords">
-
-            <!-- 
-			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<input type="text" name="location" placeholder="Location">
-			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<input type="text" name="company" placeholder="Company">
-			</div> -->
             <button type="submit" name="search" onclick="search()" class="btn btn-primary mb-2">Search</button>
 
 
@@ -107,60 +85,9 @@
         <h2 class="text-center py-3">Latest Wiki Listings</h2>
         <div class="container py-2">
 
-            <div id="result"> </div>
+            <div id="result">
 
-
-            <!-- <article class="postcard light yellow">
-				<a class="postcard__img_link" href="#">
-					<img class="postcard__img" src="https://picsum.photos/300/300" alt="Image Title" />
-				</a>
-				<div class="postcard__text t-dark">
-					<h3 class="postcard__title yellow"><a href="#">Web Designer / Developer</a></h3>
-					<div class="postcard__subtitle small">
-						<time datetime="2020-05-25 12:00:00">
-							<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2023
-						</time>
-					</div>
-					<div class="postcard__bar"></div>
-					<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim,!</div>
-					<ul class="postcard__tagbox">
-						<li class="tag__item"><i class="fas fa-tag mr-2"></i>France</li>
-						<li class="tag__item"><i class="fas fa-clock mr-2"></i> 3 mins.</li>
-						<li class="tag__item play yellow">
-							<a href="#"><i class="fas fa-play mr-2"></i>APPLY NOW</a>
-						</li>
-					</ul>
-				</div>
-			</article> -->
-            <?php
-
-            foreach ($wiki as $col) {
-
-            ?>
-
-
-                <article class="postcard light yellow">
-                    <a class="postcard__img_link" href="#">
-                        <img class="postcard__img" src="https://picsum.photos/300/300" alt="Image Title" />
-                    </a>
-                    <div class="postcard__text t-dark">
-                        <h3 class="postcard__title yellow"><a href="#"><?php echo $col["wiki_title"] ?></a></h3>
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                                <i class="fas fa-calendar-alt mr-2"><?php echo $col["date_create"] ?></i>
-                            </time>
-                        </div>
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt"><?php echo $col["wiki_content"] ?></div>
-                        <ul class="postcard__tagbox">
-                            <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["username"] ?></li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>category:<?php echo $col["name"] ?></li>
-                            <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags:<?php echo $col["tag_name"] ?></li>
-
-                        </ul>
-                    </div>
-                </article>
-            <?php } ?>
+            </div>
         </div>
     </section>
 
@@ -180,7 +107,6 @@
         function search() {
             var searchTerm = document.getElementById('keywords').value;
             // console.log(searchTerm);
-
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '?route=searchWiki&inp=' + searchTerm, true);
             xhr.onreadystatechange = function() {
@@ -191,21 +117,7 @@
             };
             xhr.send();
         }
-
         search();
-
-        // function search() {
-        //     let xml = new XMLHttpRequest();
-        //     let inp = document.getElementById('keywords').value;
-        //     console.log(inp);
-        //     open('post', '?route=searchWiki&inp=' + inp, true);
-
-        //     xml.onreadystatechange = function() {
-        //         if (xml.readyState === 4 & xml.status == 200) {
-        //             document.getElementById('result').innerHTML = xml.response;
-        //         }
-        //     }
-        // }
     </script>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

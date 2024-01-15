@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-0mJU+Xr0niBKLCXF6hE4gNcEOVJL6F8Q9V2A4dsO4GQcC4eUdX0x1f4Zx9nqgB8Yv0V8ZGZfK2cZh5KsKASxug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <nav class="navbar justify-content-space-between pe-4 ps-2 bg-dark">
         <div>
-            <a href="?route=home">home</a>
-            <a href="?route=logout">logout </a>
+            <a href="?route=home" style="color: white;">home</a>
+
         </div>
 
         <div class="navbar  gap-4">
@@ -26,20 +27,15 @@
 
 
             <div class="name">
-                <p>Author</p>
+
             </div>
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-icon pe-md-0 position-relative" data-bs-toggle="dropdown">
-                        <img src="assets/img/photo_admin.svg" alt="icon">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end position-absolute">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Account Setting</a>
-                        <a class="dropdown-item" href="/PeoplePerTask/project/pages/index.html">Log out</a>
-                    </div>
-                </li>
-            </ul>
+            <a href="" style="color: white;margin:0 10px">Author</a>
+
+            <a href="#" class="nav-icon pe-md-0 position-relative" data-bs-toggle="dropdown">
+                <img src="assets/img/photo_admin.svg" alt="icon">
+            </a>
+            <a href="?route=logout" style="color: white;margin:0 10px">logout </a>
+
         </div>
     </nav>
     <div class="container">
@@ -124,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">select Tags:</label>
-                            <select name="tag_id" id="">
+                            <select name="tag_id[]" multiple class="form-control">
                                 <?php
                                 foreach ($tags as $tag) {
                                 ?>
@@ -135,12 +131,29 @@
 
                             </select>
                         </div>
+                        <!-- <div class="form-group">
+                            <label for="">select Tags:</label>
+                            <select name="tag_id" id="">
+                                <?php
+                                foreach ($tags as $tag) {
+                                ?>
+                                    <option value="<?= $tag['tag_id'] ?>"><?= $tag['tag_name'] ?></option>
+                                <?php } ?>
+
+                                <option value="1">Tag 1</option>
+
+                            </select>
+                        </div> -->
+
                         <button name="submit" type="submit" class="btn btn-primary">Create Wiki Entry</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
