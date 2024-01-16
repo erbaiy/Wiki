@@ -3,17 +3,17 @@
 namespace App\Controllers\author;
 
 use App\Models\author\WikiModel;
+use App\Models\Database;
 
 class WikiController
 {
+    // this conction for delete wikis
     public function deleteWiki()
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $objet = new WikiModel();
-            $data = $objet->deleteWiki($id);
-            // dump($data);
-            // die();
+            $data = $objet->deleteWiki($id); // here you give the function the id of wiki you wanna delelte
             if ($data) {
                 header('Location:?route=author');
             } else {
@@ -24,11 +24,10 @@ class WikiController
 
     public function selectWiki()
     {
-
         $objet = new WikiModel();
         $tags = $objet->selectTags();
         $id = $_SESSION['user_id'];
-        // dump(($_SESSION['user_id']));
+
         if (!$id) {
             require('../view/login.php');
             exit();
@@ -40,8 +39,8 @@ class WikiController
     }
     public function WikiHome()
     {
-        $objet = new WikiModel();
-        $wiki = $objet->selectWiki();
+        // $objet = new WikiModel();
+        // $wiki = $objet->selectWiki();
         require('../view/index.php');
     }
     public function addWiki()
@@ -97,7 +96,12 @@ class WikiController
                     <ul class="postcard__tagbox">
                         <li class="tag__item"><i class="fas fa-tag mr-2"></i>created by::<?php echo $col["username"] ?></li>
                         <li class="tag__item"><i class="fas fa-clock mr-2"></i>category:<?php echo $col["name"] ?></li>
-                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags:<?php echo ($col["tag_name"]) ?></li>
+
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>tags:<?php
+                                                                                    foreach ($col['tags'] as $x) {
+                                                                                        echo $x['tag_name'] . '<br>';
+                                                                                    }
+                                                                                    ?></li>
 
                     </ul>
                 </div>
@@ -125,7 +129,7 @@ class WikiController
 
 
         $category_id = $_POST['category_id'];
-        $tag_id = $_POST['tag_id'];
+        $tag_id = $_POST['tags'];
         $wiki_id = $_POST['wiki_id'];
         if (isset($_POST['submit'])) {
             $objet = new WikiModel();

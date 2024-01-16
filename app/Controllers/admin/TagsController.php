@@ -10,10 +10,7 @@ class TagsController
     {
         $tags = new TagsModel();
         $fetch = $tags->getTags();
-
-        // $tagTable = [];
         if ($fetch) {
-
             header('Content-typ:application/json');
             echo json_encode($fetch);
         } else {
@@ -30,24 +27,17 @@ class TagsController
     }
     public function updateTags()
     {
-        // dump($_SERVER['REQUEST_METHOD']);
-        // die();
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $id = $_GET['id'];
             $name = $_GET['name'];
             $tags = new TagsModel();
             $response = $tags->updateTags($name, $id);
-            // dump($);
-            // die();
+
             if ($response) {
                 header('location:?route=selectData');
-                // header('Content-typ:application/json');
-                // echo json_encode($response);
             } else {
                 http_response_code(404);
             }
-
-            // $response = array('
         }
     }
     public function addTags()
@@ -61,8 +51,6 @@ class TagsController
             } else {
                 http_response_code(404);
             }
-
-            // $response = array('
         }
     }
 }

@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
             <label for="tag_id">Select Tags:</label>
-            <select name="tag_id">
+            <select multiple name="tags[]">
                 <?php foreach ($tags as $tag) { ?>
                     <option value="<?php echo $tag['tag_id'] ?>"><?php echo $tag['tag_name'] ?> </option>
                 <?php } ?>

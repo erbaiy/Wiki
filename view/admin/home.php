@@ -123,6 +123,7 @@
                             </div>
                             <div class="list-group-item px-3 text-center"><a href="#">View all notifications</a></div>
                         </div>
+
                     </div>
                     <div class="inline"></div>
                     <div class="name"> Admin</div>
@@ -298,28 +299,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="../public/assets/dashboard.js"></script>
     <script>
-        // $(document).ready(function() {
-        //     getData();
-        // });
-
-        // function getData() {
-        //     $.ajax({
-        //         url: "?route=getTags",
-        //         type: "GET",
-        //         success: function(response) {
-        //             $.each(JSON.parse(response), function(key, value) {
-        //                 $('#studentdata').append('<tr>' +
-        //                     '<td>' + value['tag_id'] + '</td>' +
-        //                     '<td>' + value['tag_name'] + '</td>' +
-        //                     '<td>' + '<a href="/?route=deleteCategory&id=' + value['tag_id'] + '"><i class="fa-solid fa-pencil"></i></a>' + '</td>' +
-        //                     '<td>' + '<a href="/?route=deleteTags&id=' + value['tag_id'] + '"><i class="fa-solid fa-trash"></i></a>' + '</td>' +
-        //                     '</tr>');
-        //             });
-        //         }
-        //     });
-        // }
-
-
         document.addEventListener('DOMContentLoaded', function() {
             getData();
         });
@@ -329,6 +308,7 @@
             xhr.open('GET', '?route=getTags', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
+                    // console.log(xhr.response);
                     var response = JSON.parse(xhr.responseText);
                     response.forEach(function(value, index) {
                         var row = `

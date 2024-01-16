@@ -75,6 +75,7 @@
 
         <div class="form-group mb-2">
             <input type="text" id="keywords" placeholder="Keywords">
+
             <button type="submit" name="search" onclick="search()" class="btn btn-primary mb-2">Search</button>
 
 
@@ -106,6 +107,8 @@
     <script>
         function search() {
             var searchTerm = document.getElementById('keywords').value;
+
+            // con=
             // console.log(searchTerm);
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '?route=searchWiki&inp=' + searchTerm, true);
